@@ -14,6 +14,10 @@ A collection of PowerShell functions, aliases, and utilities for enhanced termin
 ### Build Management
 - **`Clear-BuildDirectories`** (`Clear-Build`, `cb`): Recursively clear all `bin` and `obj` directories
 
+### GitHub Copilot Integration
+- **`Invoke-GitHubCopilotShell`** (`ghcs`): Get shell command suggestions from GitHub Copilot
+- **`Invoke-GitHubCopilotExplain`** (`ghce`): Explain shell commands using GitHub Copilot
+
 ### Helper Functions
 - **`Select-FromMatches`**: Interactive selection from multiple search results
 - **`Confirm-Action`**: User confirmation prompts with validation
@@ -23,15 +27,18 @@ A collection of PowerShell functions, aliases, and utilities for enhanced termin
 ```
 terminal-scripts/
 ├── functions/
-│   ├── WorktreeManagement.ps1    # Git worktree functions
+│   ├── UtilityHelpers.ps1         # Shared helper functions
+│   ├── WorktreeManagement.ps1     # Git worktree functions
 │   ├── ScpFileTransfer.ps1        # SCP with timestamp tracking
-│   └── BuildUtilities.ps1         # Build management utilities
+│   ├── BuildUtilities.ps1         # Build management utilities
+│   └── GitHubCopilot.ps1          # GitHub Copilot integration
 ├── aliases/
 │   └── PowerShellAliases.ps1      # Command aliases
 ├── config/
 │   └── Environment.ps1            # Environment setup (oh-my-posh, chocolatey, etc.)
 ├── profile.ps1                    # Main profile loader
-├── install.ps1                    # Installation script
+├── install.ps1                    # Installation script with dependency checking
+├── LICENSE                        # MIT License
 └── README.md                      # This file
 ```
 
@@ -45,8 +52,11 @@ git clone <your-repo-url> C:\Dev\terminal-scripts
 # Navigate to the directory
 cd C:\Dev\terminal-scripts
 
-# Run the installation script
-.\install.ps1 -Backup
+# Check dependencies and install profile
+.\install.ps1 -CheckDependencies -Backup
+
+# Or install missing dependencies automatically
+.\install.ps1 -InstallDependencies -Backup
 ```
 
 ### Option 2: Manual Installation
@@ -56,6 +66,19 @@ cd C:\Dev\terminal-scripts
    . "C:\Path\To\terminal-scripts\profile.ps1"
    ```
 3. Restart PowerShell or run `. $PROFILE`
+
+### Installation Script Parameters
+- **`-Backup`**: Create a backup of existing profile before modification
+- **`-Force`**: Force overwrite existing profile configuration
+- **`-CheckDependencies`**: Check for required dependencies and show status
+- **`-InstallDependencies`**: Automatically install missing dependencies
+
+### Dependencies Checked/Installed
+- **Git**: Required for worktree management functions
+- **GitHub CLI**: Required for Copilot integration
+- **Oh My Posh**: Terminal prompt theming
+- **OpenSSH Client**: Required for SCP file transfer
+- **Chocolatey**: Package manager for Windows
 
 ## 📖 Usage Examples
 
@@ -84,6 +107,18 @@ cb
 
 # Clear build directories in specific path
 Clear-BuildDirectories -Path "C:\Projects\MyApp"
+```
+
+### GitHub Copilot
+```powershell
+# Get shell command suggestion
+ghcs "how to find large files"
+
+# Get git command suggestion
+ghcs -Target git "undo last commit"
+
+# Explain a command
+ghce "git rebase -i HEAD~3"
 ```
 
 ## ⚙️ Configuration
@@ -119,9 +154,16 @@ Set-Alias -Name myalias -Value MyFunction
 ## 🛡️ Requirements
 
 - PowerShell 5.1 or later
-- Git (for worktree functions)
-- SCP client (for file transfer functions)
 - Appropriate execution policy: `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+### Optional Dependencies (auto-detected and installable)
+- **Git**: Required for worktree management functions
+- **GitHub CLI**: Required for Copilot integration  
+- **Oh My Posh**: Terminal prompt theming
+- **OpenSSH Client**: Required for SCP file transfer functions
+- **Chocolatey**: Package manager integration
+
+Use `.\install.ps1 -CheckDependencies` to see what's installed, or `.\install.ps1 -InstallDependencies` to automatically install missing components.
 
 ## 📝 Notes
 

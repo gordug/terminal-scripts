@@ -11,4 +11,8 @@ Set-Alias -Name st -Value Send-ScpTouch
 
 # Build Management
 Set-Alias -Name Clear-Build -Value Clear-BuildDirectories
-Set-Alias -Name cb -Value Clear-BuildDirectories 
+Set-Alias -Name cb -Value Clear-BuildDirectories
+
+# GitHub Copilot
+Set-Alias -Name ghcs -Value Invoke-GitHubCopilotSuggest
+Set-Alias -Name ghce -Value Invoke-GitHubCopilotExplain 

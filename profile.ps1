@@ -18,7 +18,8 @@ $functionFiles = @(
     "functions\UtilityHelpers.ps1",
     "functions\WorktreeManagement.ps1",
     "functions\ScpFileTransfer.ps1", 
-    "functions\BuildUtilities.ps1"
+    "functions\BuildUtilities.ps1",
+    "functions\GitHubCopilot.ps1"
 )
 
 foreach ($functionFile in $functionFiles) {

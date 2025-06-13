@@ -15,11 +15,4 @@ if (Test-Path($ChocolateyProfile)) {
     Import-Module "$ChocolateyProfile"
 }
 
-# GitHub Copilot Script Loading
-$CopilotScriptPath = "C:\Users\chjoh1\OneDrive - ASSA ABLOY Group\Documents\PowerShell\gh-copilot.ps1"
-if (Test-Path -Path $CopilotScriptPath) {
-    Write-Host "Loading GitHub Copilot script..."
-    . $CopilotScriptPath
-} else {
-    Write-Warning "GitHub Copilot script not found at the specified path."      
-} 
+# GitHub Copilot integration is now handled by functions/GitHubCopilot.ps1 
