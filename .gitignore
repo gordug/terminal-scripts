@@ -1,0 +1,32 @@
+# PowerShell specific
+*.ps1xml
+*.psc1
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Personal/System specific configurations
+config/personal.ps1
+local-config/
+
+# Backup files
+*.backup
+*.backup.*
+
+# IDE and editor files
+.vscode/
+.vs/
+*.swp
+*.swo
+*~
+
+# Windows specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# PowerShell execution policy bypass files
+*.ps1.txt 
